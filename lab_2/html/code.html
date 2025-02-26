@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Безуминатор 9000 – Почувствуй адреналин реальности!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .background-site {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .background-site h1, .background-site p {
+            margin-bottom: 15px;
+        }
+        .background-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .background-text p {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+        }
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .advertisement {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: linear-gradient(45deg, #FF0000, #00FF00, #0000FF);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 10px dashed yellow;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            animation: shake 0.3s infinite alternate, colorChange 2s infinite;
+        }
+        @keyframes shake {
+            from { transform: translate(-50%, -50%) rotate(-5deg); }
+            to { transform: translate(-50%, -50%) rotate(5deg); }
+        }
+        @keyframes colorChange {
+            0% { background: linear-gradient(45deg, #FF0000, #00FF00, #0000FF); }
+            50% { background: linear-gradient(45deg, #00FF00, #0000FF, #FF0000); }
+            100% { background: linear-gradient(45deg, #0000FF, #FF0000, #00FF00); }
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: white;
+            color: red;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px black;
+            animation: blink 0.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .ad-banner {
+            margin-top: 20px;
+            padding: 15px;
+            background: yellow;
+            color: red;
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 5px dashed red;
+            animation: blink 0.7s infinite alternate, rotate 2s infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0 0 10px #FF00FF;
+            animation: glow 1s infinite alternate;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #FF00FF; }
+            100% { text-shadow: 0 0 20px #00FFFF; }
+        }
+        .reason, .review {
+            margin: 10px 0;
+            font-size: 1.2em;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .corner-ad {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #FF00CC, #00FFCC, #CC00FF);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border: 5px dashed yellow;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation: shake 0.3s infinite alternate, colorChange 2s infinite;
+            z-index: 90;
+        }
+        .corner-ad.top-left {
+            top: 10px;
+            left: 10px;
+        }
+        .corner-ad.top-right {
+            top: 10px;
+            right: 10px;
+        }
+        .corner-ad.bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        .corner-ad.bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+        @media (max-width: 768px) {
+            .advertisement {
+                width: 90vw;
+                height: 90vh;
+                padding: 10px;
+            }
+            .ad-banner {
+                font-size: 1.5em;
+            }
+            .title {
+                font-size: 2em;
+            }
+            .corner-ad {
+                width: 150px;
+                height: 150px;
+                font-size: 0.8em;
+            }
+        }
+        @media (max-width: 320px) {
+            .advertisement {
+                width: 95vw;
+                height: 95vh;
+                padding: 5px;
+            }
+            .ad-banner {
+                font-size: 1.2em;
+            }
+            .title {
+                font-size: 1.5em;
+            }
+            .corner-ad {
+                width: 100px;
+                height: 100px;
+                font-size: 0.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Задний фон с текстом -->
+    <div class="background-text">
+        <p>Безуминатор 9000 – Почувствуй адреналин реальности! Безуминатор 9000 – Почувствуй адреналин реальности! Безуминатор 9000 – Почувствуй адреналин реальности!</p>
+        <p>🔥 Купи сейчас и получи вторую дозу бесплатно! 🔥 Купи сейчас и получи вторую дозу бесплатно! 🔥 Купи сейчас и получи вторую дозу бесплатно!</p>
+        <p>🎁 Только сегодня! Закажи 3 – заплати за 4! 🎁 Только сегодня! Закажи 3 – заплати за 4! 🎁 Только сегодня! Закажи 3 – заплати за 4!</p>
+        <p>⚠️ Повышение болевого порога – теперь никакие удары судьбы (и предметов) не страшны! ⚠️ Повышение болевого порога – теперь никакие удары судьбы (и предметов) не страшны!</p>
+    </div>
+
+    <div class="background-site">
+        <h1>Лекарство от головной боли</h1>
+        <p>Обезболивающие препараты помогают миллионам людей справляться с головной болью и мигренями...</p>
+        <p>Современные исследования показали, что правильный выбор лекарства может существенно облегчить жизнь...</p>
+        <p>Нестероидные противовоспалительные препараты блокируют передачу болевого сигнала...</p>
+        <p>Среди популярных методов обезболивания можно выделить как медикаментозные, так и альтернативные подходы...</p>
+        <p>Однако не все лекарства одинаково эффективны...</p>
+    </div>
+
+    <!-- Реклама в углах -->
+    <div class="corner-ad top-left">
+        <div class="close-btn" onclick="this.parentElement.remove()">✖</div>
+        <div class="title">Купи это!</div>
+        <div class="ad-banner">🔥 Скидка 90%!</div>
+    </div>
+    <div class="corner-ad top-right">
+        <div class="close-btn" onclick="this.parentElement.remove()">✖</div>
+        <div class="title">Только сегодня!</div>
+        <div class="ad-banner">🎁 Бесплатная доставка!</div>
+    </div>
+    <div class="corner-ad bottom-left">
+        <div class="close-btn" onclick="this.parentElement.remove()">✖</div>
+        <div class="title">Не упусти!</div>
+        <div class="ad-banner">⚡ Осталось 5 штук!</div>
+    </div>
+    <div class="corner-ad bottom-right">
+        <div class="close-btn" onclick="this.parentElement.remove()">✖</div>
+        <div class="title">Спеши!</div>
+        <div class="ad-banner">💥 Акция до конца дня!</div>
+    </div>
+
+    <script>
+        let adCount = 1;
+        function addAds() {
+            for (let i = 0; i < adCount; i++) {
+                let ad = document.createElement('div');
+                ad.className = 'advertisement';
+                ad.innerHTML = `
+                    <div class="close-btn" onclick="increaseAds()">✖</div>
+                    <div class="title">Безуминатор 9000 – Почувствуй адреналин реальности!</div>
+                    <div class="ad-banner">🔥 Купи сейчас и получи вторую дозу бесплатно! 🔥</div>
+                    <h2>ТОП-5 причин купить прямо сейчас:</h2>
+                    <div class="reason">🔮 Ощути мир так, как никогда раньше!</div>
+                    <div class="reason">🎭 Галлюцинации, которые достойны Оскара!</div>
+                    <div class="reason">🌀 100% натуральный состав (ну, почти).</div>
+                    <div class="reason">🤯 Идеальный подарок для того, кто «видел всё».</div>
+                    <div class="reason">⚡ Работает быстрее, чем твой интернет!</div>
+                    <h2>Побочное действие:</h2>
+                    <p>⚠️ Повышение болевого порога – теперь никакие удары судьбы (и предметов) не страшны!</p>
+                    <h2>Отзывы пользователей:</h2>
+                    <div class="review">🗣️ Василий П.: "Я увидел говорящего кота! Кот сказал, что это лучшее, что со мной случалось!"</div>
+                    <div class="review">🗣️ Анна К.: "Теперь я понимаю язык растений! Они жалуются на дождь!"</div>
+                    <div class="review">🗣️ Дмитрий Л.: "Не знаю, выпил ли я зелье или зелье выпило меня…"</div>
+                    <div class="ad-banner">🎁 Только сегодня! Закажи 3 – заплати за 4! 🎁</div>
+                `;
+                document.body.appendChild(ad);
+            }
+        }
+        function increaseAds() {
+            adCount *= 5;
+            document.querySelectorAll('.advertisement').forEach(ad => ad.remove());
+            addAds();
+        }
+        addAds();
+    </script>
+</body>
+</html>
