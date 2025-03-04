@@ -1,0 +1,233 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #000034; /* Тёмно-синий фон */
+    color: #fff;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Шапка */
+header {
+    background-color: #cc0000; /* Красный в стиле СССР */
+    color: #ffd700; /* Золотой для пафоса */
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Контейнер с Flexbox */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Основной контент */
+.main-content {
+    flex: 2;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.side-ads {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Изображения */
+.book-image, .bonus-image {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #ffd700; /* Золотая рамка */
+    margin: 10px auto;
+    display: block;
+}
+
+/* Список причин с Grid */
+.reasons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    list-style: none;
+    background-color: #004080;
+    padding: 15px;
+    border: 3px dashed #ffd700;
+    margin: 10px 0;
+}
+
+.reasons li {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #cce5ff;
+}
+
+/* Лозунги */
+.slogans {
+    background-color: #cc0000;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.slogans p {
+    font-size: 1.3em;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Отзывы с Grid */
+.reviews {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.reviews blockquote {
+    background-color: #004080;
+    padding: 10px;
+    border-left: 5px solid #ffd700;
+    font-style: italic;
+    color: #cce5ff;
+}
+
+/* Бонус */
+.bonus {
+    margin-top: 20px;
+    background-color: #004080;
+    padding: 15px;
+    border: 3px solid #ffd700;
+}
+
+/* Реклама сбоку */
+.ad {
+    background-color: #cc0000;
+    padding: 10px;
+    border: 2px solid #ffd700;
+}
+
+.ad img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ad p {
+    font-size: 0.9em;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Подвал */
+footer {
+    background-color: #000;
+    color: #ffd700;
+    padding: 15px;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+/* Media-запросы для адаптивности */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .reasons, .reviews {
+        grid-template-columns: 1fr;
+    }
+
+    .slogans p {
+        font-size: 1em;
+    }
+
+    .side-ads {
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .ad {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+    }
+
+    header p {
+        font-size: 0.8em;
+    }
+
+    .reasons li {
+        font-size: 0.9em;
+        padding: 5px;
+    }
+
+    .slogans p {
+        font-size: 0.9em;
+    }
+
+    .reviews blockquote {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+
+    .bonus h2 {
+        font-size: 1.2em;
+    }
+
+    .bonus p {
+        font-size: 0.9em;
+    }
+
+    .side-ads {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ad {
+        min-width: 100%;
+    }
+
+    footer {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+}
