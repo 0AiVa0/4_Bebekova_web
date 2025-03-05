@@ -49,6 +49,17 @@
             background: #0073e6;
             color: #fff;
         }
+        button {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
     </style>
 </head>
 <body>
@@ -69,7 +80,7 @@
 
     <section>
         <h2>Обзор просмотренного мультфильма</h2>
-        <img src="https://i.ytimg.com/vi/RFLBBFhBenw/maxresdefault.jpg" height="250" width="500" alt="Иван Царевич и Серый Волк 6">
+        <img src="https://avatars.mds.yandex.net/i?id=c9e2ac3efbcb1e7fb44f9a91736669cee092aeac-5220713-images-thumbs&n=13" height="300" width="500" alt="Иван Царевич и Серый Волк 6">
         <blockquote>
             Я недавно посмотрел мультфильм «Иван Царевич и Серый Волк 6».
             Сюжет закручивается вокруг выставки «Сказка Экспо», где героям предстоит расследовать загадочное исчезновение волшебной щуки.
@@ -80,7 +91,7 @@
 
     <section>
         <h2>Цитаты из любимой книги</h2>
-        <img src="https://i.ytimg.com/vi/1Y8D3GXElBk/maxresdefault.jpg" height="250" width="500" alt="Киётака Аянокоджи">
+        <img src="https://avatars.mds.yandex.net/i?id=f021d1dc89638895fc6edb1d9517e0aa_l-5306655-images-thumbs&ref=rim&n=13&w=2048&h=1536" height="300" width="500" alt="Киётака Аянокоджи">
         <ul>
             <li><cite>«Равенство — это лишь выдумка слабых, которые не могут преодолеть разницу в силе.» — Киётака Аянокоджи</cite></li>
             <li><cite>«Человек никогда не поймёт истинную ценность чего-либо, пока не потеряет это.»</cite></li>
@@ -145,5 +156,10 @@
         </table>
     </section>
 
+    <section>
+        <h2>Игра</h2>
+        <button onclick="startGame()">Играть в "Угадай произведение"!</button>
+    </section>
+    <script src="../javascript/index.js"></script>
 </body>
 </html>
