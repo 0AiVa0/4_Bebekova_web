@@ -1,22 +1,61 @@
-/* Общие стили */
-* {
+/* Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
+/* Base Styles */
 body {
-    background-color: #000034; /* Тёмно-синий фон */
+    background-color: #000034;
     color: #fff;
     line-height: 1.6;
     text-align: center;
+    font-family: Arial, sans-serif;
 }
 
-/* Шапка */
+/* Header */
 header {
-    background-color: #cc0000; /* Красный в стиле СССР */
-    color: #ffd700; /* Золотой для пафоса */
+    background-color: #cc0000;
+    color: #ffd700;
     padding: 20px;
     text-transform: uppercase;
 }
@@ -30,7 +69,7 @@ header p {
     margin-top: 10px;
 }
 
-/* Контейнер с Flexbox */
+/* Container */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -41,13 +80,14 @@ header p {
     gap: 20px;
 }
 
-/* Основной контент */
+/* Main Content */
 .main-content {
     flex: 2;
     min-width: 200px;
     padding: 10px;
 }
 
+/* Side Ads */
 .side-ads {
     flex: 1;
     min-width: 100px;
@@ -56,16 +96,16 @@ header p {
     gap: 20px;
 }
 
-/* Изображения */
+/* Images */
 .book-image, .bonus-image {
     max-width: 100%;
     height: auto;
-    border: 5px solid #ffd700; /* Золотая рамка */
+    border: 5px solid #ffd700;
     margin: 10px auto;
     display: block;
 }
 
-/* Список причин с Grid */
+/* Reasons List */
 .reasons {
     display: grid;
     grid-template-columns: 1fr;
@@ -83,7 +123,7 @@ header p {
     color: #cce5ff;
 }
 
-/* Лозунги */
+/* Slogans */
 .slogans {
     background-color: #cc0000;
     padding: 15px;
@@ -96,7 +136,7 @@ header p {
     text-shadow: 2px 2px 4px #000;
 }
 
-/* Отзывы с Grid */
+/* Reviews */
 .reviews {
     display: grid;
     grid-template-columns: 1fr;
@@ -112,7 +152,7 @@ header p {
     color: #cce5ff;
 }
 
-/* Бонус */
+/* Bonus Section */
 .bonus {
     margin-top: 20px;
     background-color: #004080;
@@ -120,7 +160,7 @@ header p {
     border: 3px solid #ffd700;
 }
 
-/* Реклама сбоку */
+/* Ads */
 .ad {
     background-color: #cc0000;
     padding: 10px;
@@ -138,7 +178,7 @@ header p {
     font-weight: bold;
 }
 
-/* Подвал */
+/* Footer */
 footer {
     background-color: #000;
     color: #ffd700;
@@ -147,7 +187,7 @@ footer {
     margin-top: 20px;
 }
 
-/* Media-запросы для адаптивности */
+/* Media Queries */
 @media (max-width: 600px) {
     .container {
         flex-direction: column;
