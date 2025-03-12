@@ -1,0 +1,312 @@
+/* ==== Темная тема (по умолчанию) ==== */
+:root {
+    --bg-color: #000034;
+    --text-color: #ffffff;
+    --header-bg: #420c09;
+    --header-text: #ffd700;
+    --box-bg: #004080;
+    --box-border: #ffd700;
+    --slogans-bg: #420c09;
+    --slogans-text: #ffd700;
+    --button-bg: #ffd700;
+    --button-text: #420c09;
+}
+
+/* ==== Светлая тема ==== */
+.light-theme {
+    --bg-color: #0000ff;
+    --text-color: #ffd700;
+    --header-bg: #d21404;
+    --header-text: #ffd700;
+    --box-bg: #d21404;
+    --box-border: #ffd700;
+    --slogans-bg: #d21404;
+    --slogans-text: #ffd700;
+    --button-bg: #ffd700;
+    --button-text: #d21404;
+}
+
+/* ==== Общие стили ==== */
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ==== Заголовок ==== */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* ==== Кнопка переключения темы ==== */
+#theme-toggle {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#theme-toggle:hover {
+    opacity: 0.8;
+}
+
+/* ==== Основной контейнер ==== */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* ==== Основной контент ==== */
+.main-content {
+    flex: 2;
+    min-width: 200px;
+    padding: 10px;
+}
+
+/* ==== Боковая реклама ==== */
+.side-ads {
+    flex: 1;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==== Изображения ==== */
+.book-image, .bonus-image {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid var(--box-border);
+    margin: 10px auto;
+    display: block;
+}
+
+/* ==== Список причин ==== */
+.reasons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    list-style: none;
+    background-color: var(--box-bg);
+    padding: 15px;
+    border: 3px dashed var(--box-border);
+    margin: 10px 0;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.reasons li {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* ==== Лозунги ==== */
+.slogans {
+    background-color: var(--slogans-bg);
+    padding: 15px;
+    margin: 10px 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.slogans p {
+    font-size: 1.3em;
+    color: var(--slogans-text);
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* ==== Отзывы ==== */
+.reviews {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.reviews blockquote {
+    background-color: var(--box-bg);
+    padding: 10px;
+    border-left: 5px solid var(--box-border);
+    font-style: italic;
+    color: var(--text-color);
+    transition: background-color 0.3s, border 0.3s;
+}
+
+/* ==== Бонусная секция ==== */
+.bonus {
+    margin-top: 20px;
+    background-color: var(--slogans-bg);
+    padding: 0px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    width: 71%;
+    box-sizing: border-box;
+}
+
+.bonus h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.bonus img {
+    width: 150%;
+    max-width: 400px;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+footer {
+    margin-top: auto;
+}
+
+
+/* ==== Рекламные блоки ==== */
+.ad {
+    background-color: var(--header-bg);
+    padding: 10px;
+    border: 2px solid var(--box-border);
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.ad img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ad p {
+    font-size: 0.9em;
+    color: var(--header-text);
+    font-weight: bold;
+}
+
+/* ==== Подвал ==== */
+footer {
+    background-color: #000;
+    color: var(--header-text);
+    padding: 15px;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+/* ==== Адаптивность ==== */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .reasons, .reviews {
+        grid-template-columns: 1fr;
+    }
+
+    .slogans p {
+        font-size: 1em;
+    }
+
+    .side-ads {
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .ad {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+    }
+
+    header p {
+        font-size: 0.8em;
+    }
+
+    .reasons li {
+        font-size: 0.9em;
+        padding: 5px;
+    }
+
+    .slogans p {
+        font-size: 0.9em;
+    }
+
+    .reviews blockquote {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+
+    .bonus h2 {
+        font-size: 1.0em;
+    }
+
+    .bonus p {
+        font-size: 0.9em;
+    }
+
+    .side-ads {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ad {
+        min-width: 100%;
+    }
+
+    footer {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+}

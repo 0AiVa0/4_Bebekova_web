@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СоцРейт - Подними рейтинг и получи орден!</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>СоцРейт : Элексир, который поднимет твой СОЦРЕЙТИНГ!</h1>
+        <p>КУПИ СЕЙЧАС ИЛИ БУДЬ НА ДНЕ!</p>
+        <button id="theme-toggle">Сменить тему</button>
+    </header>
+
+    <main class="container">
+        <!-- Основной контент -->
+        <section class="main-content">
+            <img src="https://avatars.mds.yandex.net/i?id=49aaf3505ede96391f604c048d857e8b3f73b19d-5886795-images-thumbs&n=13" alt="Social Booster Notebook" class="book-image">
+            <h2>ТОП-5 причин, почему тебе НУЖЕН СоцРейт:</h2>
+            <ul class="reasons">
+                <li>1. Подними рейтинг, как знамя Победы на Рейхстаге!</li>
+                <li>2. Не купишь — Родина-Мать обнулит твой рейтинг до врага народа!</li>
+                <li>3. Каждый глоток — шаг к ордену "Звезда соцсетей"!</li>
+            </ul>
+
+            <div class="slogans">
+                <p>"За Родину, за рейтинг, водку и мишку с балалайкой!"</p>
+                <p>"Слабый лайкает, сильный побеждает!"</p>
+                <p>"Система соцрейтинга зовёт: пей или в ГУЛАГ!"</p>
+            </div>
+
+
+            <h2>Отзывы:</h2>
+
+            <!-- Форма добавления отзывов -->
+            <form id="review-form">
+                <input type="text" id="name" placeholder="Ваше имя" required>
+                <textarea id="review-text" placeholder="Ваш отзыв" required></textarea>
+                <input type="number" id="rating" placeholder="Оценка (1-5)" min="1" max="5" required>
+                <button type="submit">Оставить отзыв</button>
+            </form>
+
+            <!-- Фильтрация и сортировка -->
+            <div class="filters">
+                <label for="min-rating">Фильтр по оценке:</label>
+                <input type="number" id="min-rating" placeholder="Мин. оценка (1-5)" min="1" max="5">
+
+                <label for="sort-order">Сортировать:</label>
+                <select id="sort-order">
+                    <option value="date">По дате</option>
+                    <option value="rating">По оценке</option>
+                </select>
+
+                <button id="apply-filters">Применить</button>
+            </div>
+
+            <!-- Лента отзывов -->
+            <div id="reviews-list"></div>
+        </section>
+
+        <!-- Боковая реклама -->
+        <aside class="side-ads">
+            <div class="ad">
+                <img src="https://www.meme-arsenal.com/memes/e81eeeac3da6467d9cc2a2f7b91e78e7.jpg" alt="Taiwanese Detector Ad">
+                <p>Датчик иноагентов — знай, кто рядом!</p>
+            </div>
+            <div class="ad">
+                <img src="https://avatars.mds.yandex.net/i?id=4405db6febfe43e1fa6abd0e16d6120d4b5aa5d1-4824090-images-thumbs&n=13" alt="Rice Cooker Ad">
+                <p>Медведь с балалайкой! Будь в тренде</p>
+            </div>
+            <div class="ad">
+                <img src="https://avatars.mds.yandex.net/i?id=6c8cbcf1de686e7e3efb9ae8d59aaec9_l-12521528-images-thumbs&n=13" alt="Rice Cooker Ad">
+                <p>Самогонный аппарат. Улучшай экономику родины!</p>
+            </div>
+        </aside>
+        <!-- Бонус: Волко-жена и бутылка водки -->
+            <section class="bonus">
+                <h2>БОНУС: Волко-жена и бутылка водки в подарок!</h2>
+                <img src="https://i.pinimg.com/originals/a2/6e/52/a26e529a7b7ec1c0cbc2020252af9e89.jpg" alt="Wolf Wife & Vodka" class="bonus-image">
+                <p>Милая жена и водка для твоего успеха! Только для тех, кто купит Social Booster СЕЙЧАС!</p>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>КУПИ СОЦРЕЙТ СЕЙЧАС ИЛИ СТАНЬ ВРАГОМ НАРОДА! ☎ 8-800-555-35-35</p>
+    </footer>
+
+    <script src="../JS/scripts.js"></script>
+</body>
+</html>
