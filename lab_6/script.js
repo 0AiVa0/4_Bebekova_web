@@ -158,14 +158,14 @@ function showLoading(show) {
 async function fetchRandomUser() {
     showLoading(true);
     try {
-        const response = await fetch('https://reqres.in/api/users?page=1');
-        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
-        const data = await response.json();
+        const getResponse = await fetch('https://reqres.in/api/users?page=1');
+        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
+        const data = await getResponse.json();
         const user = data.data[Math.floor(Math.random() * data.data.length)];
         const userText = `👤 ${user.first_name} ${user.last_name} (${user.email})`;
         addBlock('text', userText);
     } catch (error) {
-        addBlock('text', `Error loading user: ${error.message}`);
+        addBlock('text', `Ошибка загрузки пользователя: ${error.message}`);
     } finally {
         showLoading(false);
     }
@@ -174,12 +174,12 @@ async function fetchRandomUser() {
 async function fetchJoke() {
     showLoading(true);
     try {
-        const response = await fetch('https://official-joke-api.appspot.com/random_joke');
-        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
-        const joke = await response.json();
+        const getResponse = await fetch('https://official-joke-api.appspot.com/random_joke');
+        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
+        const joke = await getResponse.json();
         addBlock('text', `😂 ${joke.setup} - ${joke.punchline}`);
     } catch (error) {
-        addBlock('text', `Error loading joke: ${error.message}`);
+        addBlock('text', `Ошибка загрузки шутки: ${error.message}`);
     } finally {
         showLoading(false);
     }
@@ -188,13 +188,13 @@ async function fetchJoke() {
 async function fetchQuote() {
     showLoading(true);
     try {
-        const response = await fetch('https://dummyjson.com/quotes/random');
-        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
-        const quote = await response.json();
+        const getResponse = await fetch('https://dummyjson.com/quotes/random');
+        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
+        const quote = await getResponse.json();
         const quoteText = `💬 "${quote.quote}" - ${quote.author}`;
         addBlock('text', quoteText);
     } catch (error) {
-        addBlock('text', `Error loading quote: ${error.message}`);
+        addBlock('text', `Ошибка загрузки цитаты: ${error.message}`);
     } finally {
         showLoading(false);
     }
