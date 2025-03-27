@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La~la~la~ My purple paradise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-menu">
+            <div class="nav-left">
+                <button id="edit-mode-toggle" class="header-button">Режим редактирования 💜</button>
+            </div>
+            <div class="nav-center">
+                <button class="nav-item" data-api="random-user">Случайный пользователь</button>
+                <button class="nav-item" data-api="joke">Случайная шутка</button>
+                <button class="nav-item" data-api="quote">Цитата дня</button>
+                <h1 class="header-title">Давай создадим фиолетовый рай вместе💜</h1>
+            </div>
+            <div class="nav-right">
+                <button id="add-block-button" class="header-button">Добавление блока 💜</button>
+            </div>
+        </nav>
+    </header>
+    <div id="loading" class="loading-placeholder">Загрузка данных... 💜</div>
+    <main id="blocks-container"></main>
+
+    <div id="add-block-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Add New Block</h2>
+            <select id="block-type">
+                <option value="text">Text Block💜</option>
+                <option value="image">Image Block💜</option>
+                <option value="link">Link Block💜</option>
+            </select>
+            <input type="text" id="block-data" placeholder="Enter data (text, image URL, or link)">
+            <button id="confirm-add-block">Add Block</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

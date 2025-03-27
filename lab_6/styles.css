@@ -1,4 +1,3 @@
-/* Общие стили */
 body {
     font-family: 'Comic Sans MS', sans-serif;
     margin: 0;
@@ -7,15 +6,37 @@ body {
     color: #333;
 }
 
-/* Шапка */
 header {
     background-color: #6200ea;
     color: white;
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    position: relative;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 1rem;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-grow: 1;
 }
 
 .header-title {
@@ -23,37 +44,25 @@ header {
     background-color: #3700b3;
     border-radius: 20px;
     font-size: 1.5rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Comic Sans MS', serif;
     padding: 0.5rem 1rem;
+    text-align: center;
 }
 
-.header-button {
+.header-button, .nav-item {
     background-color: #3700b3;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 20px;
-    font-family: 'Comic Sans MS', monospace;
     font-weight: bold;
+    white-space: nowrap;
 }
 
-.header-button:hover {
+.header-button:hover, .nav-item:hover {
     background-color: #5600e8;
 }
 
-.left {
-    margin-right: auto;
-}
-
-.right {
-    margin-left: auto;
-}
-
-/* Блоки */
 #blocks-container {
     padding: 1rem;
 }
@@ -66,40 +75,18 @@ header {
     border-radius: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.block.dragging {
-    opacity: 0.5;
-    transform: scale(0.95);
-    box-shadow: 0 0 10px rgba(98, 0, 234, 0.5);
-}
-
-.block.drag-over {
-    border: 2px dashed #3700b3;
-    background-color: rgba(98, 0, 234, 0.1);
+    color: #6200ea;
+    font-size: 1.2rem;
 }
 
 .text-block {
     font-family: 'Comic Sans MS', sans-serif;
-    font-size: 1rem;
-    color: #333;
-}
-
-.image-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #6200ea;
-    border-radius: 50px;
 }
 
 .image-block img {
     max-width: 100%;
     height: auto;
     border-radius: 20px;
-    border: 2px solid #3700b3;
 }
 
 .link-block a {
@@ -121,16 +108,13 @@ header {
     border: none;
     border-radius: 4px;
     padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
     cursor: pointer;
-    font-family: 'Comic Sans MS', sans-serif;
 }
 
 .delete-button:hover {
     background-color: #d50000;
 }
 
-/* Модальное окно */
 .modal {
     display: none;
     position: fixed;
@@ -148,22 +132,16 @@ header {
     padding: 1rem;
     border-radius: 8px;
     width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.modal-content .close {
+.close {
     float: right;
     cursor: pointer;
     font-size: 1.5rem;
 }
 
-.modal-content .close:hover {
+.close:hover {
     color: #3700b3;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    font-family: 'Comic Sans MS', serif;
 }
 
 .modal-content select,
@@ -171,8 +149,6 @@ header {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
 }
 
 .modal-content button {
@@ -183,10 +159,31 @@ header {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Comic Sans MS', monospace;
-    font-weight: bold;
 }
 
-.modal-content button:hover {
-    background-color: #3700b3;
+.loading-placeholder {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(98, 0, 234, 0.9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-left, .nav-right, .nav-center {
+        justify-content: center;
+        width: 100%;
+    }
+    .header-title {
+        margin: 0.5rem 0;
+    }
 }

@@ -25,7 +25,7 @@ class ImageBlock extends Block {
 
 class LinkBlock extends Block {
     render() {
-        return `<div class="block link-block"><a href="${this.data.url}">${this.data.text}</a></div>`;
+        return `<div class="block link-block"><a href="${this.data.url}" target="_blank">${this.data.text}</a></div>`;
     }
 }
 
@@ -90,8 +90,7 @@ function handleDragEnd() {
 }
 
 function toggleEditMode() {
-    const body = document.body;
-    body.classList.toggle('edit-mode');
+    document.body.classList.toggle('edit-mode');
     buildPage();
 }
 
@@ -111,14 +110,14 @@ function addBlock(type, data) {
             throw new Error("Unknown block type");
     }
     blocks.push(newBlock);
-    buildPage();
     saveToLocalStorage();
+    buildPage();
 }
 
 function removeBlock(index) {
     blocks.splice(index, 1);
-    buildPage();
     saveToLocalStorage();
+    buildPage();
 }
 
 function saveToLocalStorage() {
@@ -152,41 +151,93 @@ function isValidImageUrl(url) {
     return /\.(jpeg|jpg|gif|png|webp)$/i.test(url);
 }
 
-// Модальное окно
-const modal = document.getElementById('add-block-modal');
-const addBlockButton = document.getElementById('add-block-button');
-const closeModal = document.querySelector('.close');
-const confirmAddBlock = document.getElementById('confirm-add-block');
+function showLoading(show) {
+    document.getElementById('loading').style.display = show ? 'block' : 'none';
+}
 
-addBlockButton.onclick = () => {
-    modal.style.display = 'block';
-};
-
-closeModal.onclick = () => {
-    modal.style.display = 'none';
-};
-
-confirmAddBlock.onclick = () => {
-    const type = document.getElementById('block-type').value;
-    const data = document.getElementById('block-data').value;
-
-    if (!data) {
-        alert('Please enter data');
-        return;
+async function fetchRandomUser() {
+    showLoading(true);
+    try {
+        const response = await fetch('https://reqres.in/api/users?page=1');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const data = await response.json();
+        const user = data.data[Math.floor(Math.random() * data.data.length)];
+        const userText = `👤 ${user.first_name} ${user.last_name} (${user.email})`;
+        addBlock('text', userText);
+    } catch (error) {
+        addBlock('text', `Error loading user: ${error.message}`);
+    } finally {
+        showLoading(false);
     }
+}
 
-    if (type === 'image' && !isValidImageUrl(data)) {
-        alert('Please enter a valid image URL (jpg, jpeg, png, gif, webp)');
-        return;
+async function fetchJoke() {
+    showLoading(true);
+    try {
+        const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const joke = await response.json();
+        addBlock('text', `😂 ${joke.setup} - ${joke.punchline}`);
+    } catch (error) {
+        addBlock('text', `Error loading joke: ${error.message}`);
+    } finally {
+        showLoading(false);
     }
+}
 
-    addBlock(type, data);
-    document.getElementById('block-data').value = '';
-    modal.style.display = 'none';
-};
+async function fetchQuote() {
+    showLoading(true);
+    try {
+        const response = await fetch('https://dummyjson.com/quotes/random');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const quote = await response.json();
+        const quoteText = `💬 "${quote.quote}" - ${quote.author}`;
+        addBlock('text', quoteText);
+    } catch (error) {
+        addBlock('text', `Error loading quote: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
 
-// Загрузка страницы
 document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
+
+    const modal = document.getElementById('add-block-modal');
+    const addBlockButton = document.getElementById('add-block-button');
+    const closeModal = document.querySelector('.close');
+    const confirmAddBlock = document.getElementById('confirm-add-block');
+
     document.getElementById('edit-mode-toggle').onclick = toggleEditMode;
+
+    addBlockButton.onclick = () => modal.style.display = 'block';
+    closeModal.onclick = () => modal.style.display = 'none';
+
+    confirmAddBlock.onclick = () => {
+        const type = document.getElementById('block-type').value;
+        const data = document.getElementById('block-data').value;
+
+        if (!data) {
+            alert('Please enter data');
+            return;
+        }
+
+        if (type === 'image' && !isValidImageUrl(data)) {
+            alert('Please enter a valid image URL (jpg, jpeg, png, gif, webp)');
+            return;
+        }
+
+        addBlock(type, data);
+        document.getElementById('block-data').value = '';
+        modal.style.display = 'none';
+    };
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const apiType = item.dataset.api;
+            if (apiType === 'random-user') fetchRandomUser();
+            if (apiType === 'joke') fetchJoke();
+            if (apiType === 'quote') fetchQuote();
+        });
+    });
 });
