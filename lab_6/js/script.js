@@ -1,11 +1,11 @@
 let blocks = [];
 let draggedBlock = null;
+let currentUserId = null;
 
 class Block {
     constructor(data) {
         this.data = data;
     }
-
     render() {
         throw new Error("Method 'render()' must be implemented.");
     }
@@ -147,23 +147,23 @@ function loadFromLocalStorage() {
     }
 }
 
-function isValidImageUrl(url) {
-    return /\.(jpeg|jpg|gif|png|webp)$/i.test(url);
-}
-
 function showLoading(show) {
     document.getElementById('loading').style.display = show ? 'block' : 'none';
 }
 
+function isValidImageUrl(url) {
+    return /\.(jpeg|jpg|gif|png|webp)$/i.test(url);
+}
+
+// API функции
 async function fetchRandomUser() {
     showLoading(true);
     try {
-        const getResponse = await fetch('https://reqres.in/api/users?page=1');
-        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
-        const data = await getResponse.json();
+        const response = await fetch('https://reqres.in/api/users?page=1');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const data = await response.json();
         const user = data.data[Math.floor(Math.random() * data.data.length)];
-        const userText = `👤 ${user.first_name} ${user.last_name} (${user.email})`;
-        addBlock('text', userText);
+        addBlock('text', `👤 ${user.first_name} ${user.last_name} (${user.email})`);
     } catch (error) {
         addBlock('text', `Ошибка загрузки пользователя: ${error.message}`);
     } finally {
@@ -174,9 +174,9 @@ async function fetchRandomUser() {
 async function fetchJoke() {
     showLoading(true);
     try {
-        const getResponse = await fetch('https://official-joke-api.appspot.com/random_joke');
-        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
-        const joke = await getResponse.json();
+        const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const joke = await response.json();
         addBlock('text', `😂 ${joke.setup} - ${joke.punchline}`);
     } catch (error) {
         addBlock('text', `Ошибка загрузки шутки: ${error.message}`);
@@ -188,9 +188,9 @@ async function fetchJoke() {
 async function fetchQuote() {
     showLoading(true);
     try {
-        const getResponse = await fetch('https://dummyjson.com/quotes/random');
-        if (!getResponse.ok) throw new Error(`GET error! Status: ${getResponse.status}`);
-        const quote = await getResponse.json();
+        const response = await fetch('https://dummyjson.com/quotes/random');
+        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
+        const quote = await response.json();
         const quoteText = `💬 "${quote.quote}" - ${quote.author}`;
         addBlock('text', quoteText);
     } catch (error) {
@@ -200,6 +200,85 @@ async function fetchQuote() {
     }
 }
 
+async function createUser() {
+    showLoading(true);
+    try {
+        if (currentUserId) {
+            addBlock('text', `⚠ Ошибка: Нельзя создать больше одного пользователя. Удалите текущего.`);
+            return;
+        }
+        const response = await fetch('https://reqres.in/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: 'Alex Purple', email: 'alex.purple@paradise.com' })
+        });
+        if (!response.ok) throw new Error(`POST error! Status: ${response.status}`);
+        const data = await response.json();
+        currentUserId = data.id;
+        addBlock('text', `➕ Пользователь создан: ${data.name} (${data.email}) ID: ${data.id}`);
+    } catch (error) {
+        addBlock('text', `Ошибка создания пользователя: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function updateUser() {
+    showLoading(true);
+    try {
+        if (!currentUserId) throw new Error('Сначала создайте пользователя');
+        const response = await fetch(`https://reqres.in/api/users/${currentUserId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: 'Alex Updated', email: 'alex.updated@paradise.com' })
+        });
+        if (!response.ok) throw new Error(`PUT error! Status: ${response.status}`);
+        const data = await response.json();
+        addBlock('text', `🔄 Пользователь обновлен: ${data.name} (${data.email})`);
+    } catch (error) {
+        addBlock('text', `Ошибка обновления пользователя: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function patchUser() {
+    showLoading(true);
+    try {
+        if (!currentUserId) throw new Error('Сначала создайте пользователя');
+        const response = await fetch(`https://reqres.in/api/users/${currentUserId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: 'alex.patched@paradise.com' })
+        });
+        if (!response.ok) throw new Error(`PATCH error! Status: ${response.status}`);
+        const data = await response.json();
+        addBlock('text', `📝 Частично обновлен: Email: ${data.email}`);
+    } catch (error) {
+        addBlock('text', `Ошибка частичного обновления: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function deleteUser() {
+    showLoading(true);
+    try {
+        if (!currentUserId) throw new Error('Сначала создайте пользователя');
+        const response = await fetch(`https://reqres.in/api/users/${currentUserId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error(`DELETE error! Status: ${response.status}`);
+        addBlock('text', `🗑 Пользователь ID:${currentUserId} удален`);
+        currentUserId = null;
+    } catch (error) {
+        addBlock('text', `Ошибка удаления пользователя: ${error.message}`);
+    } finally {
+        showLoading(false);
+    }
+}
+
+// Обработчики событий
 document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
 
@@ -238,6 +317,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (apiType === 'random-user') fetchRandomUser();
             if (apiType === 'joke') fetchJoke();
             if (apiType === 'quote') fetchQuote();
+            if (apiType === 'create-user') createUser();
+            if (apiType === 'update-user') updateUser();
+            if (apiType === 'patch-user') patchUser();
+            if (apiType === 'delete-user') deleteUser();
         });
     });
 });
