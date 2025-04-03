@@ -214,3 +214,9 @@ header {
         margin: 0.5rem 0;
     }
 }
+
+.nav-item:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #888;
+}

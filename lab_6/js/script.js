@@ -155,8 +155,15 @@ function isValidImageUrl(url) {
     return /\.(jpeg|jpg|gif|png|webp)$/i.test(url);
 }
 
-// API функции
+// Функция для блокировки/разблокировки кнопок
+function toggleButton(apiType, disable) {
+    const button = document.querySelector(`.nav-item[data-api="${apiType}"]`);
+    if (button) button.disabled = disable;
+}
+
+// API функции с блокировкой кнопок
 async function fetchRandomUser() {
+    toggleButton('random-user', true);
     showLoading(true);
     try {
         const response = await fetch('https://reqres.in/api/users?page=1');
@@ -168,10 +175,12 @@ async function fetchRandomUser() {
         addBlock('text', `Ошибка загрузки пользователя: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('random-user', false);
     }
 }
 
 async function fetchJoke() {
+    toggleButton('joke', true);
     showLoading(true);
     try {
         const response = await fetch('https://official-joke-api.appspot.com/random_joke');
@@ -182,10 +191,12 @@ async function fetchJoke() {
         addBlock('text', `Ошибка загрузки шутки: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('joke', false);
     }
 }
 
 async function fetchQuote() {
+    toggleButton('quote', true);
     showLoading(true);
     try {
         const response = await fetch('https://dummyjson.com/quotes/random');
@@ -197,10 +208,12 @@ async function fetchQuote() {
         addBlock('text', `Ошибка загрузки цитаты: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('quote', false);
     }
 }
 
 async function createUser() {
+    toggleButton('create-user', true);
     showLoading(true);
     try {
         if (currentUserId) {
@@ -220,10 +233,12 @@ async function createUser() {
         addBlock('text', `Ошибка создания пользователя: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('create-user', false);
     }
 }
 
 async function updateUser() {
+    toggleButton('update-user', true);
     showLoading(true);
     try {
         if (!currentUserId) throw new Error('Сначала создайте пользователя');
@@ -239,10 +254,12 @@ async function updateUser() {
         addBlock('text', `Ошибка обновления пользователя: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('update-user', false);
     }
 }
 
 async function patchUser() {
+    toggleButton('patch-user', true);
     showLoading(true);
     try {
         if (!currentUserId) throw new Error('Сначала создайте пользователя');
@@ -258,10 +275,12 @@ async function patchUser() {
         addBlock('text', `Ошибка частичного обновления: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('patch-user', false);
     }
 }
 
 async function deleteUser() {
+    toggleButton('delete-user', true);
     showLoading(true);
     try {
         if (!currentUserId) throw new Error('Сначала создайте пользователя');
@@ -275,6 +294,7 @@ async function deleteUser() {
         addBlock('text', `Ошибка удаления пользователя: ${error.message}`);
     } finally {
         showLoading(false);
+        toggleButton('delete-user', false);
     }
 }
 
