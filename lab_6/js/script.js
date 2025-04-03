@@ -155,60 +155,60 @@ function isValidImageUrl(url) {
     return /\.(jpeg|jpg|gif|png|webp)$/i.test(url);
 }
 
-// Функция для блокировки/разблокировки кнопок
 function toggleButton(apiType, disable) {
     const button = document.querySelector(`.nav-item[data-api="${apiType}"]`);
     if (button) button.disabled = disable;
 }
 
-// API функции с блокировкой кнопок
-async function fetchRandomUser() {
-    toggleButton('random-user', true);
+// API функции
+async function fetchNasaAPOD() {
+    toggleButton('nasa-apod', true);
     showLoading(true);
     try {
-        const response = await fetch('https://reqres.in/api/users?page=1');
+        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
         if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
         const data = await response.json();
-        const user = data.data[Math.floor(Math.random() * data.data.length)];
-        addBlock('text', `👤 ${user.first_name} ${user.last_name} (${user.email})`);
+        addBlock('image', data.url);
+        addBlock('text', `🌌 ${data.title}: ${data.explanation}`);
     } catch (error) {
-        addBlock('text', `Ошибка загрузки пользователя: ${error.message}`);
+        addBlock('text', `Ошибка загрузки APOD: ${error.message}`);
     } finally {
         showLoading(false);
-        toggleButton('random-user', false);
+        toggleButton('nasa-apod', false);
     }
 }
 
-async function fetchJoke() {
-    toggleButton('joke', true);
+async function fetchRandomCat() {
+    toggleButton('random-cat', true);
     showLoading(true);
     try {
-        const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+        const response = await fetch('https://api.thecatapi.com/v1/images/search');
         if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
-        const joke = await response.json();
-        addBlock('text', `😂 ${joke.setup} - ${joke.punchline}`);
+        const data = await response.json();
+        addBlock('image', data[0].url);
+        addBlock('text', `🐱 Случайная кошка (ID: ${data[0].id})`);
     } catch (error) {
-        addBlock('text', `Ошибка загрузки шутки: ${error.message}`);
+        addBlock('text', `Ошибка загрузки кошки: ${error.message}`);
     } finally {
         showLoading(false);
-        toggleButton('joke', false);
+        toggleButton('random-cat', false);
     }
 }
 
-async function fetchQuote() {
-    toggleButton('quote', true);
+async function fetchCataasCat() {
+    toggleButton('cataas-cat', true);
     showLoading(true);
     try {
-        const response = await fetch('https://dummyjson.com/quotes/random');
-        if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
-        const quote = await response.json();
-        const quoteText = `💬 "${quote.quote}" - ${quote.author}`;
-        addBlock('text', quoteText);
+        const text = encodeURIComponent('Purple Paradise');
+        const timestamp = Date.now(); // Уникальная временная метка
+        const url = `https://cataas.com/cat/says/${text}?fontColor=purple&fontSize=40&ts=${timestamp}`;
+        addBlock('image', url);
+        addBlock('text', `🐾 Кот с надписью "Purple Paradise"`);
     } catch (error) {
-        addBlock('text', `Ошибка загрузки цитаты: ${error.message}`);
+        addBlock('text', `Ошибка загрузки кота: ${error.message}`);
     } finally {
         showLoading(false);
-        toggleButton('quote', false);
+        toggleButton('cataas-cat', false);
     }
 }
 
@@ -334,9 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', () => {
             const apiType = item.dataset.api;
-            if (apiType === 'random-user') fetchRandomUser();
-            if (apiType === 'joke') fetchJoke();
-            if (apiType === 'quote') fetchQuote();
+            if (apiType === 'nasa-apod') fetchNasaAPOD();
+            if (apiType === 'random-cat') fetchRandomCat();
+            if (apiType === 'cataas-cat') fetchCataasCat();
             if (apiType === 'create-user') createUser();
             if (apiType === 'update-user') updateUser();
             if (apiType === 'patch-user') patchUser();
