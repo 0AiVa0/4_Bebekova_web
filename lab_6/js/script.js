@@ -165,12 +165,17 @@ async function fetchNasaAPOD() {
     toggleButton('nasa-apod', true);
     showLoading(true);
     try {
-        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+        const randomDate = new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000)
+            .toISOString()
+            .split('T')[0]; // Случайная дата за последние 30 дней
+        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${randomDate}`);
         if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
         const data = await response.json();
-        addBlock('image', data.url);
+        const url = `${data.url}?width=200&height=200`; // Пробуем задать размер (зависит от сервера)
+        addBlock('image', url);
         addBlock('text', `🌌 ${data.title}: ${data.explanation}`);
     } catch (error) {
+        console.error('Ошибка NASA API:', error);
         addBlock('text', `Ошибка загрузки APOD: ${error.message}`);
     } finally {
         showLoading(false);
@@ -178,20 +183,20 @@ async function fetchNasaAPOD() {
     }
 }
 
-async function fetchRandomCat() {
-    toggleButton('random-cat', true);
+async function fetchRandomQuote() {
+    toggleButton('random-quote', true); // Изменили data-api на "random-quote"
     showLoading(true);
     try {
-        const response = await fetch('https://api.thecatapi.com/v1/images/search');
+        const response = await fetch('https://dummyjson.com/quotes/random');
         if (!response.ok) throw new Error(`GET error! Status: ${response.status}`);
         const data = await response.json();
-        addBlock('image', data[0].url);
-        addBlock('text', `🐱 Случайная кошка (ID: ${data[0].id})`);
+        addBlock('text', `💬 "${data.quote}" - ${data.author}`);
     } catch (error) {
-        addBlock('text', `Ошибка загрузки кошки: ${error.message}`);
+        console.error('Ошибка Quote API:', error);
+        addBlock('text', `Ошибка загрузки цитаты: ${error.message}`);
     } finally {
         showLoading(false);
-        toggleButton('random-cat', false);
+        toggleButton('random-quote', false);
     }
 }
 
@@ -199,12 +204,11 @@ async function fetchCataasCat() {
     toggleButton('cataas-cat', true);
     showLoading(true);
     try {
-        const text = encodeURIComponent('Purple Paradise');
-        const timestamp = Date.now(); // Уникальная временная метка
-        const url = `https://cataas.com/cat/says/${text}?fontColor=purple&fontSize=40&ts=${timestamp}`;
+        const timestamp = Date.now();
+        const url = `https://cataas.com/cat?width=200&height=200&ts=${timestamp}`; // Добавляем размер
         addBlock('image', url);
-        addBlock('text', `🐾 Кот с надписью "Purple Paradise"`);
     } catch (error) {
+        console.error('Ошибка CATAAS:', error);
         addBlock('text', `Ошибка загрузки кота: ${error.message}`);
     } finally {
         showLoading(false);
@@ -335,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             const apiType = item.dataset.api;
             if (apiType === 'nasa-apod') fetchNasaAPOD();
-            if (apiType === 'random-cat') fetchRandomCat();
+            if (apiType === 'random-quote') fetchRandomQuote();
             if (apiType === 'cataas-cat') fetchCataasCat();
             if (apiType === 'create-user') createUser();
             if (apiType === 'update-user') updateUser();

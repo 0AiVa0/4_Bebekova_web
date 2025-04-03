@@ -220,3 +220,12 @@ header {
     cursor: not-allowed;
     background-color: #888;
 }
+
+.image-block img {
+    width: 700px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid #3700b3;
+    display: block;
+}
